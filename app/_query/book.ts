@@ -77,9 +77,10 @@ export const useBookDeleteMutaion = () => {
 
 export async function getBookForServer(bookId: string): Promise<Book | null> {
   try {
-    const res = await axios.get<Book>(`api/books/${bookId}`);
+    const res = await axios.get<Book>(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${bookId}`);
     return res.data;
   } catch (error: unknown) {
+    console.log(error);
     if (axios.isAxiosError(error) && error.response?.status === 404) {
       return null;
     }

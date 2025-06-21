@@ -26,7 +26,6 @@ export default async function EditBook({ params }: { params: PageParams }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      {/* bookId를 전달하지 않아 추가 모드로 작동 */}
       <BookFormClient bookId={bookId} bookData={initialBookData} />
     </HydrationBoundary>
   );
