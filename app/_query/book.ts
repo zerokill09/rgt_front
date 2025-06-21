@@ -5,7 +5,6 @@ import { Book, SearchParam } from "../_interface/book";
 import qs from "qs";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
-import { API_HOST_URL } from "../_constants/apiHost";
 
 export const useBookListQuery = ({
     page,
@@ -21,7 +20,7 @@ export const useBookListQuery = ({
             });
 
             const res = await axios.request<ListData<Book>>({
-                url: `/books?${query}`,
+                url: `api/books?${query}`,
                 method: "GET"
             });
 
@@ -36,7 +35,7 @@ export const useBookDetailQuery = (bookId: string) => {
         queryKey: ["bookDetail", bookId],
         queryFn: async () => {
             const res = await axios.request<Book>({
-                url: `/books/${bookId}`,
+                url: `api/books/${bookId}`,
                 method: "GET"
             });
             return res. data;
@@ -50,7 +49,7 @@ export const useBookWriteMutation = () => {
     return useMutation<Book, ApiError, {bookId?: string, bookData: Partial<Book> }>({
         mutationFn :async(params) => {
         const { bookId, bookData } = params;
-        const url = bookId != undefined ? `/books/${bookId}` : `/books`;
+        const url = bookId != undefined ? `api/books/${bookId}` : `/books`;
         const method = bookId != undefined ? "PUT" : "POST";
 
         const res = await axios.request({
@@ -68,7 +67,7 @@ export const useBookDeleteMutaion = () => {
       const { bookId } = params;
 
       const res = await axios.request({
-        url: `/books/${bookId}`,
+        url: `api/books/${bookId}`,
         method: "DELETE",
       });
 
@@ -78,7 +77,7 @@ export const useBookDeleteMutaion = () => {
 
 export async function getBookForServer(bookId: string): Promise<Book | null> {
   try {
-    const res = await axios.get<Book>(`${API_HOST_URL}/books/${bookId}`);
+    const res = await axios.get<Book>(`api/books/${bookId}`);
     return res.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error) && error.response?.status === 404) {
