@@ -49,7 +49,7 @@ export const useBookWriteMutation = () => {
     return useMutation<Book, ApiError, {bookId?: string, bookData: Partial<Book> }>({
         mutationFn :async(params) => {
         const { bookId, bookData } = params;
-        const url = bookId != undefined ? `/api/books/${bookId}` : `/books`;
+        const url = bookId != undefined ? `/api/books/${bookId}` : `/api/books`;
         const method = bookId != undefined ? "PUT" : "POST";
 
         const res = await axios.request({
