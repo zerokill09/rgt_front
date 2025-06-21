@@ -1,0 +1,1 @@
+export const API_HOST_URL = process.env.NODE_ENV == "production" ? "http://ec2-3-39-187-242.ap-northeast-2.compute.amazonaws.com/api" : "http://localhost:8080/api";

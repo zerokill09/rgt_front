@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+td.require::after {
+  display: inline-block;
+  content: "*";
+  font-size: 16px;
+  margin-right: 3px;
+  color: red;
+  position: relative;
+  top: -1px;
+  line-height: 20px;
+}
+
+th.require::after {
+  display: inline-block;
+  content: "*";
+  font-size: 16px;
+  margin-right: 3px;
+  color: red;
+  position: relative;
+  top: -1px;
+  line-height: 20px;
+}
