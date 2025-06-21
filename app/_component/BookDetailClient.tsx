@@ -24,10 +24,14 @@ export default function BookDetailClient({ bookId }: { bookId: string }) {
   function handleEvent(): void {
     if (!confirm("정말 삭제하시겠습니까?")) return;
 
-    bookDelete({ bookId }).then(() => {
-      alert("삭제 완료");
-      router.push("/books");
-    });
+    bookDelete({ bookId })
+      .then(() => {
+        alert("삭제 완료");
+        router.push("/books");
+      })
+      .catch((e) => {
+        alert("에러가 발생했습니다. : " + e.response?.data.message);
+      });
   }
 
   return (
