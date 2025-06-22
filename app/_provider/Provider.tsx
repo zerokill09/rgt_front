@@ -6,6 +6,9 @@ type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * react query 적용을 위한 Prodvider
+ */
 function Providers({ children }: Props) {
   const [client] = React.useState(
     new QueryClient({

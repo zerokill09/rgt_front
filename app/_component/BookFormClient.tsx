@@ -27,6 +27,11 @@ import {
 import { NumericFormat } from "react-number-format";
 import { useRouter } from "next/navigation";
 
+/**
+ * 책 입력/수정 폼 컴포넌트
+ * @param {string} bookId - 상세 정보를 조회할 도서의 ID
+ * @param {Book} bookData - 수정일 경우 기존 책 정보 전달
+ */
 export default function BookFormClient({
   bookId,
   bookData,
@@ -47,8 +52,12 @@ export default function BookFormClient({
     reset,
     formState: { errors },
   } = methods;
+
   const { mutateAsync: executeBookWrite } = useBookWriteMutation();
+
+  //입력 이벤트 발생
   const onSubmit: SubmitHandler<Book> = (inputData, e) => {
+    //중복 클릭 방지
     if (e) {
       e.preventDefault();
     }

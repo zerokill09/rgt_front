@@ -6,6 +6,7 @@ import qs from "qs";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosResponse } from "axios";
 
+// 책 목록 조회(검색)
 export const useBookListQuery = ({
     page,
     bookName,
@@ -29,6 +30,7 @@ export const useBookListQuery = ({
     })
 }
 
+// 책 상세 조회
 export const useBookDetailQuery = (bookId: string) => {
     const axios = useAxios();
     return useQuery<Book, ApiError>({
@@ -44,12 +46,17 @@ export const useBookDetailQuery = (bookId: string) => {
     })
 }
 
+// 책 추가/수정
 export const useBookWriteMutation = () => {
     const axios = useAxios();
     return useMutation<Book, ApiError, {bookId?: string, bookData: Partial<Book> }>({
         mutationFn :async(params) => {
         const { bookId, bookData } = params;
-        const url = bookId != undefined ? `/api/books/${bookId}` : `/api/books`;
+
+        /**
+         * bookId 가 없으면 추가, 있으면 수정
+         */
+        const url = bookId != undefined ? `/api/books/${bookId}` : `/api/books`; 
         const method = bookId != undefined ? "PUT" : "POST";
 
         const res = await axios.request({
@@ -60,6 +67,7 @@ export const useBookWriteMutation = () => {
     }})
 }
 
+// 책 삭제
 export const useBookDeleteMutaion = () => {
   const axios = useAxios();
   return useMutation<AxiosResponse<void>, ApiError, { bookId: string }>({
@@ -75,15 +83,15 @@ export const useBookDeleteMutaion = () => {
     }});
 };
 
+// 서버사이드 컴포넌트에서 책 상세 정보 조회를 하기 위한 함수
 export async function getBookForServer(bookId: string): Promise<Book | null> {
   try {
     const res = await axios.get<Book>(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${bookId}`);
     return res.data;
   } catch (error: unknown) {
-    console.log(error);
     if (axios.isAxiosError(error) && error.response?.status === 404) {
       return null;
     }
-    throw new Error(`[Server] Error getting book details for ID: ${bookId}`);
+    throw new Error(`[Server] 오류가 발생했습니다. ID: ${bookId}`);
   }
 }

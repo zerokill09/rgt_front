@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  //Mixed Content 에러 해결을 위한 rewrite 룰 추가
   async rewrites() {
     return [
       {

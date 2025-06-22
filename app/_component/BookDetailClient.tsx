@@ -11,20 +11,25 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { NumericFormat } from "react-number-format";
 
+/**
+ * 책 상세 페이지 컴포넌트
+ * @param {string} bookId - 상세 정보를 조회할 도서의 ID
+ */
 export default function BookDetailClient({ bookId }: { bookId: string }) {
   const router = useRouter();
 
-  const { data } = useBookDetailQuery(bookId);
-  const { mutateAsync: bookDelete } = useBookDeleteMutaion();
+  const { data } = useBookDetailQuery(bookId); // 책 상세 정보는 react query 로 가져옴
+  const { mutateAsync: executeBookDelete } = useBookDeleteMutaion(); // 책 삭제 처리를 위한 뮤테이션 함수
 
   if (!data) {
     return <></>;
   }
 
+  //삭제 버튼 클릭 시 이벤트 발생
   function handleEvent(): void {
     if (!confirm("정말 삭제하시겠습니까?")) return;
 
-    bookDelete({ bookId })
+    executeBookDelete({ bookId })
       .then(() => {
         alert("삭제 완료");
         router.push("/books");
@@ -56,7 +61,7 @@ export default function BookDetailClient({ bookId }: { bookId: string }) {
           variant="outlined"
           size="small"
           component={Link}
-          href={`/books/${bookId}/edit`}
+          href={`/books/${bookId}/edit`} // 수정 페이지로 이동
           sx={{ marginRight: 1 }}
         >
           수정

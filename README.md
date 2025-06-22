@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 도서 관리 어플리케이션 프론트엔드
 
-## Getting Started
+이 프로젝트는 도서 관리 애플리케이션의 프론트엔드를 구현합니다. 책 목록 조회, 상세 정보 확인, 수정 등의 기능을 제공합니다.
 
-First, run the development server:
+## 🚀 기술 스택
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **프레임워크:** Next.js 15.3.4 (App Router)
+* **언어:** TypeScript
+* **스타일링:** Material UI
+* **상태 관리:** React Query 
+* **HTTP 클라이언트:** Axios
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ 주요 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **책 목록 페이지:**
+    * 페이지네이션
+    * 제목 및 저자 기반 검색
+* **책 상세 정보 페이지:**
+    * 책 정보 조회
+    * 책 정보 수정
+* **책 추가 기능:**
+    * 새로운 책 추가 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ 설정 및 실행 방법
 
-## Learn More
+### 1. 전제 조건
 
-To learn more about Next.js, take a look at the following resources:
+* Node.js (18.x)
+* Yarn
+* **백엔드 API 서버가 실행 중이어야 합니다.** (기본적으로 `http://localhost:8080` 또는 배포된 서버 주소)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. 실행
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* yarn install
+* 로컬 : yarn dev
+* 운영 : yarn build; yarn start

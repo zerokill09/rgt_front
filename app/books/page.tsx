@@ -23,14 +23,19 @@ import {
   StyledTextField,
 } from "../_style/common";
 
+/**
+ * 책 목록 페이지 컴포넌트. 검색 기능 제공
+ */
 export default function BookList() {
   const defaultParam = new SearchParam();
-  const [searchParam, setSearchParam] = useState(defaultParam);
+
+  const [searchParam, setSearchParam] = useState(defaultParam); // 검색 쿼리 객체 초기화
   const { data } = useBookListQuery(searchParam);
 
-  const methods = useForm<Book>();
+  const methods = useForm<Book>(); //검색 키워드 입력 폼
   const { register, handleSubmit, reset } = methods;
 
+  //페이지 이동 이벤트
   const handlePage = (event: unknown, value: number) => {
     setSearchParam((searchParam) => ({
       ...searchParam,
@@ -38,6 +43,7 @@ export default function BookList() {
     }));
   };
 
+  //검색어 입력 이벤트
   const onSubmit = (inputData: Book) => {
     setSearchParam({
       ...inputData,
@@ -62,7 +68,7 @@ export default function BookList() {
         <StyledButton
           variant="outlined"
           size="small"
-          onClick={() => setSearchParam({ ...defaultParam })}
+          onClick={() => setSearchParam({ ...defaultParam })} // 전체 버튼을 누르면 검색 쿼리 초기화 하여 전체 목록 불러옴
         >
           전체
         </StyledButton>
